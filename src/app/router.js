@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Main from './views/Main.vue';
-import TodoView from './views/TodoView.vue';
+import NoteView from './views/NoteView.vue';
 
 Vue.use(Router);
 
@@ -13,8 +13,8 @@ const router = new Router({
       component: Main,
     },
     {
-      path: '/todo',
-      component: TodoView,
+      path: '/note/:id',
+      component: NoteView,
     },
   ],
 });

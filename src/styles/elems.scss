@@ -21,6 +21,19 @@
     align-items: center;
 }
 
+.t-input {
+    background: var(--input-bg);
+    border: 1px solid var(--input-border-color);
+    color: var(--input-color);
+    font-size: 12px;
+    width: 100%;
+    outline: none;
+    resize: none;
+    font-family: "Didact Gothic";
+    box-sizing: border-box;
+    padding: 7px 13px;
+}
+
 .primary-btn{
     color: white;
     background: var(--primary-btn-color);
