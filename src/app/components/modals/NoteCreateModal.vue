@@ -46,12 +46,13 @@
           class="t-input"
           placeholder="Title"
         />
-        <textarea
+        <NoteEditor v-model="note.text" />
+        <!-- <textarea
           v-model="note.text"
           rows="4"
           class="t-input"
           placeholder="Note"
-        ></textarea>
+        ></textarea> -->
 
         <div class="section-title">
           <span>
@@ -63,7 +64,8 @@
         </div>
 
         <div class="todos">
-          <div v-for="todo in note.todos" :key="todo.id" class="todo">
+          <div v-for="(todo, index) in note.todos" :key="todo.id" class="todo">
+            <div class="counter">{{ index + 1 }}.</div>
             <input v-model="todo.title" placeholder="Task description" type="text" class="t-input" />
             <div class="remove-todo-btn" @click="removeTodo(todo)">
               <img src="./../../../assets/images/cancel.svg" svg-inline alt="" cla/>
@@ -90,9 +92,13 @@
 <script>
 import {} from 'app/'
 import { generateID } from '../../../utils/common';
+import NoteEditor from 'app/components/NoteEditor.vue';
+
 export default {
   name: 'NoteCreateModal',
-  components: {},
+  components: {
+    NoteEditor,
+  },
 
   data() {
     return {
@@ -132,7 +138,7 @@ export default {
     },
 
     confirm() {
-      this.$store.dispatch('ADD_NOTE', this.note);
+      this.$store.dispatch('NOTE_ADD', this.note);
 
       this.close();
     },
@@ -156,9 +162,8 @@ export default {
       margin-bottom: 20px;
     }
 
-    
-    textarea {
-      @include scrollbar(2px);
+    .app-note-editor {
+      margin-bottom: 20px;
     }
 
     .section-title {
@@ -191,6 +196,17 @@ export default {
 
       .todo {
         position: relative;
+        display: flex;
+
+        .counter {
+          font-size: 13px;
+          color: var(--primary-text-color);
+          margin-right: 10px;
+          margin-top: 9px;
+          margin-left: -2px;
+          text-align: right;
+          width: 30px;
+        }
   
         input {
           padding-right: 35px;

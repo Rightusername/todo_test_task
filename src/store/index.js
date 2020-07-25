@@ -18,17 +18,24 @@ export default new Vuex.Store({
     },
   },
   mutations: {
-    ADD_NOTE: (state, payload) => {
+    NOTE_ADD: (state, payload) => {
       payload.id = generateID();
       state.notes.push(payload);
     },
+    NOTE_EDIT: (state, payload) => {
+      state.notes.find((item, index) => {
+        item.id == payload.id;
+        state.notes.splice(index, 1, payload);
+        return;
+      })
+    },
   },
   actions: {
-    ADD_NOTE: (context, payload) => {
-      return new Promise((resolve, reject) => {
-        context.commit('ADD_NOTE', payload);
-        resolve(payload);
-      });
+    NOTE_ADD: (context, payload) => {
+      context.commit('NOTE_ADD', payload);
+    },
+    NOTE_EDIT: (context, payload) => {
+      context.commit('NOTE_EDIT', payload);
     },
   },
   modules: {},

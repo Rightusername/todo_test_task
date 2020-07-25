@@ -174,7 +174,7 @@ const production = {
   ...base,
   output: {
     path: path.join(__dirname, 'build'),
-    filename: 'js/[name]_[hash:base64:8].js'
+    filename: 'js/[name]_[hash].js'
   },
   mode: 'production',
   devtool: false,
