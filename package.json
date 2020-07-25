@@ -9,9 +9,10 @@
     "test-prod": "cross-env NODE_ENV=production npm run unit-test && npm run e2e-test",
     "unit-test": "jest __tests__/.*.spec.js --silent",
     "e2e-test": "jest __e2e-tests__ --runInBand",
-    "lint": "eslint --quiet -f codeframe src"
+    "lint": "eslint --quiet -f codeframe src",
+    "pre-commit": "npm run build && git add ."
   },
-  "pre-commit": ["build"],
+  "pre-commit": ["pre-commit"],
   "author": "Lime",
   "license": "MIT",
   "dependencies": {
