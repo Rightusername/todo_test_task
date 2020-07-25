@@ -10,11 +10,10 @@
     "unit-test": "jest __tests__/.*.spec.js --silent",
     "e2e-test": "jest __e2e-tests__ --runInBand",
     "lint": "eslint --quiet -f codeframe src",
-    "pre-commit": "npm run build && git add ."
+    "pre-commit": "npm run build && git add .",
+    "deploy": "npm run build && git add . && git commit -m \"deploy\" && git subtree push --prefix public origin gh-pages"
   },
-  "pre-commit": [
-    "pre-commit"
-  ],
+  "pre-commit": [],
   "author": "Lime",
   "license": "MIT",
   "dependencies": {
