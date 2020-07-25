@@ -12,7 +12,7 @@
     "lint": "eslint --quiet -f codeframe src",
     "pre-commit": "npm run build && git add ."
   },
-  "pre-commit": [],
+  "pre-commit": ["pre-commit"],
   "author": "Lime",
   "license": "MIT",
   "dependencies": {
