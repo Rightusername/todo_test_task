@@ -80,33 +80,41 @@ export default {
 .app-todo {
   display: flex;
   align-items: flex-start;
+  width: 100%;
 
-  .title {
-    width: 200px;
-    font-size: 13px;
-    box-sizing: border-box;
-  }
+  .title-wrap {
+    flex-grow: 1;
 
-  p.title {
-    margin: 0;
-    margin-left: 3px;
-    margin-top: 3px;
-    height: 25px;
-  }
+    .title {
+      width: 100%;
+      font-size: 13px;
+      box-sizing: border-box;
+    }
 
-  textarea.title {
-    background: var(--sec-btn-bg);
-    margin-right: 3px;
-    border: 1px solid var(--sec-btn-border-color);
-    resize: none;
-    outline: none;
-    @include scrollbar(2px);
-  }
+    p.title {
+      margin: 0;
+      margin-left: 3px;
+      margin-top: 3px;
+      min-height: 25px;
+    }
+
+    textarea.title {
+      background: var(--sec-btn-bg);
+      margin-right: 3px;
+      border: 1px solid var(--sec-btn-border-color);
+      resize: none;
+      outline: none;
+      @include scrollbar(2px);
+    }
   
+  }
+
+
   .controls {
     width: 100px;
     display: flex;
     align-items: center;
+    flex-shrink: 0;
 
     .remove-btn {
       width: 18px;
@@ -116,6 +124,7 @@ export default {
       align-items: center;
       justify-content: center;
       margin-right: 20px;
+      margin-left: 20px;
 
       svg {
         width: 70%;

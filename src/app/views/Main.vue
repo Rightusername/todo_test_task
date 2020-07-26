@@ -68,5 +68,6 @@ export default {
 
 <style lang="scss" scoped>
 .app-main {
+  position: relative;
 }
 </style>

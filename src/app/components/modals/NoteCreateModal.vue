@@ -162,8 +162,12 @@ export default {
       margin-bottom: 20px;
     }
 
-    .app-note-editor {
+    /deep/ .app-note-editor {
       margin-bottom: 20px;
+
+      .ql-editor {
+        height: 100px;
+      }
     }
 
     .section-title {
@@ -186,6 +190,11 @@ export default {
           height: auto;
         }
       }
+    }
+
+    .t-todos {
+      height: 200px;
+      max-height: 200px;
     }
 
 

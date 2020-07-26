@@ -35,8 +35,6 @@
 }
 
 .t-todos {
-    height: 200px;
-    max-height: 200px;
     @include scrollbar(2px);
     overflow: auto;
 
@@ -97,6 +95,26 @@
 .primary-btn{
     color: white;
     background: var(--primary-btn-color);
+    border-radius: 8px;
+    width: 90px;
+    font-size: 13px;
+    text-align: center;
+    padding: 10px 0;
+    cursor: pointer;
+    font-weight: normal;
+}
+
+.secondary-btn{
+    color: var(--sec-btn-color);
+    background: var(--sec-btn-bg);
+    border: 1px solid var(--sec-btn-border-color);
+    border-radius: 8px;
+    width: 90px;
+    font-size: 13px;
+    text-align: center;
+    padding: 10px 0;
+    cursor: pointer;
+    font-weight: normal;
 }
 
 @mixin input-range{

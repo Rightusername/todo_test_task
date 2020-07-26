@@ -15,6 +15,7 @@ const router = new Router({
     {
       path: '/note/:id',
       component: NoteView,
+      meta: { transitionName: 'fade-left' },
     },
   ],
 });

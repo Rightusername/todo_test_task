@@ -76,9 +76,10 @@ export default {
     }
     .ql-container {
       border: none;
+      height: calc(100% - 41px);
 
       .ql-editor {
-        height: 100px;
+        // height: 100px;
         @include scrollbar(2px);
 
         background: var(--input-bg);

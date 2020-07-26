@@ -1,6 +1,8 @@
 <template>
   <div class="app-root dark">
-    <router-view />
+    <transition-page>
+      <router-view />
+    </transition-page>
     <modals-container />
   </div>
 </template>
@@ -8,9 +10,13 @@
 <script>
 import { mapGetters } from 'vuex';
 
+import TransitionPage from './components/TransitionPage.vue';
+
 export default {
   name: 'App',
-  components: {},
+  components: {
+    TransitionPage,
+  },
   data() {
     return {
       isGrab: false,
@@ -47,6 +53,8 @@ export default {
 .app-root {
   height: 100%;
   min-width: 1024px;
+  width: 100%;
+  overflow: hidden;
   font-family: 'Didact Gothic';
   // background: url('./../assets/images/bg.png');
   background: var(--background-darken-color);
