@@ -34,6 +34,66 @@
     padding: 7px 13px;
 }
 
+.t-todos {
+    height: 200px;
+    max-height: 200px;
+    @include scrollbar(2px);
+    overflow: auto;
+
+    .todo {
+        position: relative;
+        display: flex;
+
+        .counter {
+            font-size: 13px;
+            color: var(--primary-text-color);
+            margin-right: 10px;
+            margin-top: 9px;
+            margin-left: -2px;
+            text-align: right;
+            width: 30px;
+        }
+
+        input {
+            padding-right: 35px;
+            margin-bottom: 5px;
+        }
+
+        .remove-todo-btn {
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            width: 28px;
+            height: 35px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            svg {
+                width: 11px;
+                height: auto;
+            }
+        }
+
+        &:last-child {
+            input {
+                margin-bottom: 0px;
+            }
+        }
+    }
+
+    .empty-label {
+        font-size: 13px;
+        color: var(--primary-text-color);
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+}
+
 .primary-btn{
     color: white;
     background: var(--primary-btn-color);

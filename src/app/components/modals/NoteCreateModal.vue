@@ -43,7 +43,7 @@
           ref="title"
           v-model="note.title"
           type="text"
-          class="t-input"
+          class="t-input title-input"
           placeholder="Title"
         />
         <NoteEditor v-model="note.text" />
@@ -63,7 +63,7 @@
           </div>
         </div>
 
-        <div class="todos">
+        <div class="t-todos">
           <div v-for="(todo, index) in note.todos" :key="todo.id" class="todo">
             <div class="counter">{{ index + 1 }}.</div>
             <input v-model="todo.title" placeholder="Task description" type="text" class="t-input" />
@@ -158,7 +158,7 @@ export default {
     height: 35px;
   }
   main {
-    .t-input {
+    .title-input {
       margin-bottom: 20px;
     }
 
@@ -188,68 +188,8 @@ export default {
       }
     }
 
-    .todos {
-      height: 200px;
-      max-height: 200px;
-      @include scrollbar(2px);
-      overflow: auto;
-
-      .todo {
-        position: relative;
-        display: flex;
-
-        .counter {
-          font-size: 13px;
-          color: var(--primary-text-color);
-          margin-right: 10px;
-          margin-top: 9px;
-          margin-left: -2px;
-          text-align: right;
-          width: 30px;
-        }
-  
-        input {
-          padding-right: 35px;
-          margin-bottom: 5px;
-        }
-
-        .remove-todo-btn {
-          position: absolute;
-          top: 0px;
-          right: 0px;
-          width: 28px;
-          height: 35px;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          svg {
-            width: 11px;
-            height: auto;
-          }
-        }
-
-        &:last-child{
-          input {
-            margin-bottom: 0px;
-          }
-        }
-      }
-
-      .empty-label {
-        font-size: 13px;
-        color: var(--primary-text-color);
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-    }
-
 
     p {
-      color: var(--primary-text-color);
       font-size: 13px;
       line-height: 2.2;
       margin: 0;

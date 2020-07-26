@@ -24,7 +24,9 @@ export default {
   },
   updated() {
   },
-  created() {},
+  created() {
+    this.$store.dispatch('LOAD_STATE');
+  },
 
   mounted() {},
 

@@ -44,6 +44,14 @@ svg{
   outline: none;
 }
 
+textarea {
+  font-family: 'Didact Gothic';
+}
+
+* {
+  color: var(--primary-text-color);
+}
+
 a {
   text-decoration: none;
 }

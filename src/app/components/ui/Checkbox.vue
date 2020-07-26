@@ -57,16 +57,17 @@ export default {
   }
 
   .box {
-    width: 12px;
-    height: 12px;
-    background: #37b7fa;
-    transform: scale(0);
+    width: 14px;
+    height: 14px;
+    transform: rotate(-30deg) scale(0);
+    background: #15ce05 url('./../../../assets/images/connect.svg') no-repeat center;
+    background-size: 80%;
     opacity: 0;
-    transition: all 0.1s ease-in;
+    transition: transform 0.15s ease-in, opacity 0.05s ease-in;
 
     &.checked {
       opacity: 1;
-      transform: scale(1);
+      transform: rotate(0deg) scale(1);
     }
   }
 }

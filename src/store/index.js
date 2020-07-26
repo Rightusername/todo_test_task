@@ -18,24 +18,38 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    SET_STATE: (state, payload) => {
+      Object.assign(state, payload);
+    },
     NOTE_ADD: (state, payload) => {
       payload.id = generateID();
       state.notes.push(payload);
     },
     NOTE_EDIT: (state, payload) => {
       state.notes.find((item, index) => {
-        item.id == payload.id;
-        state.notes.splice(index, 1, payload);
-        return;
-      })
+        if (item.id == payload.id) {
+          state.notes.splice(index, 1, payload);
+          return;
+        }
+      });
     },
   },
   actions: {
     NOTE_ADD: (context, payload) => {
       context.commit('NOTE_ADD', payload);
+      context.dispatch('SAVE_STATE');
     },
     NOTE_EDIT: (context, payload) => {
       context.commit('NOTE_EDIT', payload);
+      context.dispatch('SAVE_STATE');
+    },
+
+    SAVE_STATE: (context, payload) => {
+      localStorage.setItem('state', JSON.stringify(context.state));
+    },
+
+    LOAD_STATE: (context, payload) => {
+      context.commit('SET_STATE', JSON.parse(localStorage.getItem('state')));
     },
   },
   modules: {},
