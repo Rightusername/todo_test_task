@@ -1,23 +1,30 @@
 <template>
   <div class="app-main">
-    main
+    <header>
+      <h1>
+        Notes
+      </h1>
+      <div class="primary-btn" @click="createNote">Create Note</div>
+    </header>
 
-    <router-link class="note" v-for="item in notes" :key="item.id" :to="'/note/' + item.id">
-      {{ item.title }}
-    </router-link>
-    <button @click="createNote">createNote</button>
+    <div class="no-notes" v-if="!notes || notes.length == 0">No notes</div>
+    <div class="notes-list">
+      <Note v-for="(note, index) in notes" :item="note" :index="index" :key="note.id" />
+    </div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
 
-import ConfrimModal from 'app/components/modals/ConfirmModal.vue';
 import NoteCreateModal from 'app/components/modals/NoteCreateModal.vue';
+import Note from 'app/components/Note.vue';
 
 export default {
   name: 'Main',
-  components: {},
+  components: {
+    Note,
+  },
   data() {
     return {};
   },
@@ -29,9 +36,7 @@ export default {
 
   beforeDestroy() {},
 
-  mounted() {
-    // this.openConfirm();
-  },
+  mounted() {},
 
   methods: {
     createNote() {
@@ -43,31 +48,48 @@ export default {
         }
       );
     },
-    openConfirm() {
-      this.$modal.show(
-        ConfrimModal,
-        {
-          data: {
-            title: 't',
-            text: 's',
-            btns: {
-              confirm: {
-                title: 23,
-              },
-            },
-          },
-        },
-        {
-          transition: 'fade',
-        }
-      );
-    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+@import '~styles/_mixins.scss';
+
 .app-main {
+  max-width: 1100px;
+  margin: 0 auto;
   position: relative;
+  transition: none;
+  height: 100%;
+  padding-bottom: 20px;
+  box-sizing: border-box;
+
+  header {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .no-notes {
+    text-align: center;
+    margin-top: 40px;
+    color: var(--input-border-color);
+    font-size: 14px;
+  }
+
+  .notes-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-auto-rows: max-content;
+    gap: 20px;
+    // display: flex;
+    // flex-wrap: wrap;
+    overflow: auto;
+    height: calc(100% - 100px);
+    @include scrollbar(2px);
+
+
+  }
 }
 </style>

@@ -9,7 +9,10 @@
         <h1>
           {{ note.title }}
         </h1>
-        <div class="save-btn primary-btn" @click="saveNote">Save</div>
+        <div class="controls">
+          <div class="remove-btn secondary-btn" @click="removeNote">Remove</div>
+          <div class="save-btn primary-btn" @click="saveNote">Save</div>
+        </div>
       </header>
       <div class="note-wrap">
         <NoteEditor v-model="note.text" />
@@ -23,7 +26,7 @@
           <div class="t-todos">
             <div v-for="(todo, index) in note.todos" :key="todo.id" class="todo">
               <div class="counter">{{ index + 1 }}.</div>
-              <Todo :todo="todo" @remove="onTodoRemove(todo)" />
+              <Todo :lastCreatedTask="lastCreatedTask" :todo="todo" @remove="onTodoRemove(todo)" />
             </div>
             <div v-if="note.todos.length == 0" class="empty-label">
               No tasks yet
@@ -40,9 +43,9 @@ import { mapGetters } from 'vuex';
 
 import clonedeep from 'lodash-es/cloneDeep';
 import { generateID } from '../../utils/common';
-import { events } from '../../utils/events';
 
 import NoteEditor from 'app/components/NoteEditor.vue';
+import ConfrimModal from 'app/components/modals/ConfirmModal.vue';
 import Todo from 'app/components/Todo.vue';
 
 export default {
@@ -54,6 +57,7 @@ export default {
   data() {
     return {
       note: null,
+      lastCreatedTask: null,
     };
   },
   computed: {
@@ -86,9 +90,35 @@ export default {
         id: generateID(),
       };
       this.note.todos.push(todo);
+      this.lastCreatedTask = todo;
+
       setTimeout(() => {
-        events.emit('TODO_SET_EDITABLE', todo.id);
+        this.lastCreatedTask = null;
       }, 50);
+    },
+
+    removeNote() {
+      this.$modal.show(
+        ConfrimModal,
+        {
+          data: {
+            title: 'Remove note',
+            text: 'Are you sure you want to remove this note?',
+            btns: {
+              confirm: {
+                title: 'Remove',
+                callback: () => {
+                  this.$store.dispatch('NOTE_REMOVE', this.note.id);
+                  this.$router.push('/');
+                },
+              },
+            },
+          },
+        },
+        {
+          transition: 'fade',
+        }
+      );
     },
 
     onTodoRemove(todo) {
@@ -112,6 +142,8 @@ export default {
   height: 100%;
   width: 100%;
   position: absolute;
+  padding-right: 50px;
+  box-sizing: border-box;
   z-index: 100;
   top: 0px;
   left: 0px;
@@ -168,17 +200,23 @@ export default {
     h1 {
       margin: 0;
     }
+
+    .controls {
+      display: flex;
+      align-items: center;
+
+      .remove-btn {
+        margin-right: 20px;
+      }
+    }
   }
 
   .main-section {
     flex-grow: 1;
     padding: 0 20px;
     padding-bottom: 20px;
-    max-width: 1200px;
+    max-width: 1100px;
     margin: 0 auto;
-    h1 {
-      font-size: 28px;
-    }
 
     .note-wrap {
       display: flex;

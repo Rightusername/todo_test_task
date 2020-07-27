@@ -16,7 +16,6 @@
 <script>
 import { mapGetters } from 'vuex';
 import { downOutside } from 'src/utils/directives/down-outside';
-import { events } from '../../utils/events';
 
 import Checkbox from 'app/components/ui/Checkbox.vue';
 
@@ -33,6 +32,10 @@ export default {
       type: Object,
       required: true,
     },
+    lastCreatedTask: {
+      type: Object,
+      default: null,
+    },
   },
   data() {
     return {
@@ -44,11 +47,11 @@ export default {
   },
 
   mounted() {
-    events.addListener('TODO_SET_EDITABLE', this.onSetEditable);
+    if (this.lastCreatedTask && this.lastCreatedTask.id == this.todo.id) {
+      this.edit();
+    }
   },
-  destroyed() {
-    events.removeListener('TODO_SET_EDITABLE', this.onSetEditable);
-  },
+
   methods: {
     onSetEditable(id) {
       if (this.todo.id == id) {

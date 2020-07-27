@@ -25,13 +25,17 @@ export default new Vuex.Store({
       payload.id = generateID();
       state.notes.push(payload);
     },
+    NOTE_REMOVE: (state, id) => {
+      let index = state.notes.findIndex(item => item.id == id);
+      if (index >= 0) {
+        state.notes.splice(index, 1);
+      }
+    },
     NOTE_EDIT: (state, payload) => {
-      state.notes.find((item, index) => {
-        if (item.id == payload.id) {
-          state.notes.splice(index, 1, payload);
-          return;
-        }
-      });
+      let index = state.notes.findIndex(item => item.id == payload.id);
+      if (index >= 0) {
+        state.notes.splice(index, 1, payload);
+      }
     },
   },
   actions: {
@@ -41,6 +45,10 @@ export default new Vuex.Store({
     },
     NOTE_EDIT: (context, payload) => {
       context.commit('NOTE_EDIT', payload);
+      context.dispatch('SAVE_STATE');
+    },
+    NOTE_REMOVE: (context, payload) => {
+      context.commit('NOTE_REMOVE', payload);
       context.dispatch('SAVE_STATE');
     },
 

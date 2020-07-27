@@ -105,7 +105,7 @@ export default {
   transition: transform 0.35s, opacity 0.25s;
 }
 .fade-left-enter, .fade-left-leave {
-  transform: translateX(7%);
+  transform: translateX(3%);
   opacity: 0;
 }
 .fade-left-leave-to {
