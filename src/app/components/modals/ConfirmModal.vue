@@ -43,10 +43,10 @@
           {{data.text}}
         </p>
         <div class="controls">
-          <div class="controls-btn cancel" @click="close" v-if="data.btns.cancel">
+          <div class="controls-btn cancel" @click="onCloseBtn" v-if="data.btns.cancel">
             {{ data.btns.cancel.title ? data.btns.cancel.title : 'Cancel' }}
           </div>
-          <div class="controls-btn confirm" @click="confirm">
+          <div class="controls-btn confirm" @click="onConfirmBtn">
             {{ data.btns.confirm.title ? data.btns.confirm.title : 'Save' }}
           </div>
         </div>
@@ -83,7 +83,18 @@ export default {
       }
     },
 
-    confirm() {
+    onCloseBtn() {
+      if (
+        this.data.btns &&
+        this.data.btns.cancel &&
+        this.data.btns.cancel.callback
+      ) {
+        this.data.btns.cancel.callback();
+      }
+      this.close();
+    },
+
+    onConfirmBtn() {
       if (
         this.data.btns &&
         this.data.btns.confirm &&

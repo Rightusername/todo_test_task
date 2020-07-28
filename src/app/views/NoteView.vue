@@ -1,8 +1,8 @@
 <template>
   <div v-if="note" class="app-note-view">
-    <router-link to="/" class="back-btn">
+    <div class="back-btn" @click="onBackRoute">
       <img src="./../../assets/images/triangle.svg" svg-inline alt="" />
-    </router-link>
+    </div>
 
     <div class="main-section">
       <header>
@@ -11,11 +11,11 @@
         </h1>
         <div class="controls">
           <div class="remove-btn secondary-btn" @click="removeNote">Remove</div>
-          <div class="save-btn primary-btn" @click="saveNote">Save</div>
+          <div class="save-btn primary-btn" :class="{disabled: isSaved}" @click="saveNote">Save</div>
         </div>
       </header>
       <div class="note-wrap">
-        <NoteEditor v-model="note.text" />
+        <NoteEditor @change="setSaved(false)" v-model="note.text" />
         <div class="todo-list">
           <h2>
             <span>
@@ -26,7 +26,7 @@
           <div class="t-todos">
             <div v-for="(todo, index) in note.todos" :key="todo.id" class="todo">
               <div class="counter">{{ index + 1 }}.</div>
-              <Todo :lastCreatedTask="lastCreatedTask" :todo="todo" @remove="onTodoRemove(todo)" />
+              <Todo :lastCreatedTask="lastCreatedTask" :todo="todo" @remove="onTodoRemove(todo)" @change="setSaved(false)" />
             </div>
             <div v-if="note.todos.length == 0" class="empty-label">
               No tasks yet
@@ -58,6 +58,7 @@ export default {
     return {
       note: null,
       lastCreatedTask: null,
+      isSaved: true,
     };
   },
   computed: {
@@ -81,6 +82,7 @@ export default {
   methods: {
     saveNote() {
       this.$store.dispatch('NOTE_EDIT', this.note);
+      this.setSaved(true);
     },
 
     addTodo() {
@@ -91,6 +93,7 @@ export default {
       };
       this.note.todos.push(todo);
       this.lastCreatedTask = todo;
+      this.setSaved(false);
 
       setTimeout(() => {
         this.lastCreatedTask = null;
@@ -121,6 +124,10 @@ export default {
       );
     },
 
+    setSaved(value) {
+      this.isSaved = value;
+    },
+
     onTodoRemove(todo) {
       this.note.todos.find((item, index) => {
         if (item && item.id == todo.id) {
@@ -128,6 +135,41 @@ export default {
           return;
         }
       });
+      this.setSaved(false);
+    },
+
+    onBackRoute() {
+      if (this.isSaved) {
+        this.$router.push('/');
+      } else {
+        this.$modal.show(
+          ConfrimModal,
+          {
+            data: {
+              title: 'Not saved data',
+              text: 'Do you want save note?',
+              btns: {
+                confirm: {
+                  title: 'Save',
+                  callback: () => {
+                    this.saveNote();
+                    this.$router.push('/');
+                  },
+                },
+                cancel: {
+                  title: 'Don\'t save',
+                  callback: () => {
+                    this.$router.push('/');
+                  },
+                },
+              },
+            },
+          },
+          {
+            transition: 'fade',
+          }
+        );
+      }
     },
   },
 };

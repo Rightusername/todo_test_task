@@ -2,13 +2,13 @@
   <div class="app-todo">
     <div class="title-wrap" @click="edit(todo)" v-down-outside="noedit">
       <p class="title" v-if="!editable">{{todo.title}}</p>
-      <textarea rows="3" ref="titleInput" v-if="editable" v-model="todo.title" placeholder="Task description" type="text" class="title" ></textarea>
+      <textarea @input="onTextChange" rows="3" ref="titleInput" v-if="editable" v-model="todo.title" placeholder="Task description" type="text" class="title" ></textarea>
     </div>
     <div class="controls">
       <div class="remove-btn" @click="remove">
         <img src="./../../assets/images/cancel.svg" svg-inline alt=""/>
       </div>
-      <Checkbox v-model="todo.completed" />
+      <Checkbox @input="onCheckboxChange" v-model="todo.completed" />
     </div>
   </div>
 </template>
@@ -58,6 +58,12 @@ export default {
         this.edit();
       }
     },
+    onTextChange() {
+      this.$emit('change');
+    },
+    onCheckboxChange() {
+      this.$emit('change');
+    },
     remove() {
       this.$emit('remove', this.todo);
     },
@@ -72,7 +78,7 @@ export default {
     },
     save() {
       this.editable = false;
-    }
+    },
   },
 };
 </script>

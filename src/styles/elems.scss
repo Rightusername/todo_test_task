@@ -102,6 +102,13 @@
     padding: 10px 0;
     cursor: pointer;
     font-weight: normal;
+    transition: all 0.2s ease;
+
+    &.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+        cursor: default;
+    }
 }
 
 .secondary-btn{
@@ -115,6 +122,14 @@
     padding: 10px 0;
     cursor: pointer;
     font-weight: normal;
+
+    transition: all 0.2s ease;
+
+    &.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+        cursor: default;
+    }
 }
 
 @mixin input-range{

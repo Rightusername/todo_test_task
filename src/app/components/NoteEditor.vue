@@ -38,6 +38,9 @@ export default {
     });
     this.quill.on('text-change', (delta, oldDelta, source) => {
       this.emitInput();
+      if (source == 'user') {
+        this.$emit('change');
+      }
     });
     if (this.value.ops) {
       this.quill.setContents(this.value.ops);
