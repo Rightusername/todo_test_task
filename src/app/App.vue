@@ -28,17 +28,14 @@ export default {
       return {};
     },
   },
-  updated() {
-  },
+  updated() {},
   created() {
     this.$store.dispatch('LOAD_STATE');
   },
 
   mounted() {},
 
-  methods: {
-
-  },
+  methods: {},
 };
 </script>
 
@@ -56,7 +53,6 @@ export default {
   width: 100%;
   overflow: hidden;
   font-family: 'Didact Gothic';
-  // background: url('./../assets/images/bg.png');
   background: var(--background-darken-color);
 }
 </style>

@@ -76,7 +76,7 @@ export default {
       this.picked = item;
       this.close();
       this.$emit('input', this.picked)
-    }
+    },
   },
 };
 </script>

@@ -54,9 +54,6 @@ export default {
       theme: 'snow',
     });
     this.quill.setContents(this.item.text);
-    // let tempCont = document.createElement('div');
-    // new Quill(tempCont).setContents(this.item.text);
-    // this.textHTML = tempCont.getElementsByClassName('ql-editor')[0].innerHTML;
   },
   methods: {
     removeNote(note) {
@@ -96,7 +93,6 @@ export default {
   box-sizing: border-box;
   border-radius: 8px;
   position: relative;
-
 
   .title {
     font-size: 16px;

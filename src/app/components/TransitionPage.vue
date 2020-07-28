@@ -35,13 +35,6 @@ export default {
       this.from = from;
       let transitionName = to.meta.transitionName || from.meta.transitionName || DEFAULT_TRANSITION;
 
-      // if (transitionName === 'slide') {
-      //   const toDepth = to.path.split('/').length;
-      //   const fromDepth = from.path.split('/').length;
-      //   transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left';
-      // }
-
-      // this.transitionMode = DEFAULT_TRANSITION_MODE;
       if (to.meta.transitionName) {
         this.transitionEnterActiveClass = `${transitionName}-enter-active`;
       } else {
@@ -53,20 +46,7 @@ export default {
         this.transitionLeaveActiveClass = null;
       }
 
-      // if (to.meta.transitionName === 'zoom') {
-      //   this.transitionMode = 'in-out';
-      //   this.transitionEnterActiveClass = 'zoom-enter-active';
-      //   document.body.style.overflow = 'hidden';
-      // }
-
-      // if (from.meta.transitionName === 'zoom') {
-      //   this.transitionMode = null;
-      //   this.transitionEnterActiveClass = null;
-      //   document.body.style.overflow = null;
-      // }
-
       this.transitionName = transitionName;
-      // console.log(this.transitionName);
 
       next();
     });
